@@ -1,0 +1,15 @@
+function [f,g] = nearestNeighbor(folder,numClasses)
+[transformW, means] = whiten(folder,numClasses);
+examples = getTestExamples(folder);
+
+A = load("normalized_lines3d.txt");
+B = load("test_norm3d.txt");
+sizeB = rows(B);
+NN = zeros(sizeB,1);
+for i = 1:1:sizeB
+	NN(i) = nearestNeighbor3D(A,B,i);
+endfor
+C = load("labelled_test_1.txt");
+D = NN == C;
+percent_correct = sum(D) / rows(D)
+endfunction
