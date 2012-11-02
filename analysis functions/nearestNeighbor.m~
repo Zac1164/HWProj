@@ -1,15 +1,19 @@
-function [f,g] = nearestNeighbor(folder,numClasses)
-[transformW, means] = whiten(folder,numClasses);
-examples = getTestExamples(folder);
+function f = nearestNeighbor(means,data)
 
-A = load("normalized_lines3d.txt");
-B = load("test_norm3d.txt");
-sizeB = rows(B);
-NN = zeros(sizeB,1);
-for i = 1:1:sizeB
-	NN(i) = nearestNeighbor3D(A,B,i);
+numFeatures = columns(means) - 1;
+dataManipulation = means(:,1:numFeatures);
+
+for j = 1:1:numFeatures
+	dataManipulation(:,j) = dataManipulation(:,j) - data(1,j);
 endfor
-C = load("labelled_test_1.txt");
-D = NN == C;
-percent_correct = sum(D) / rows(D)
+
+dataManipulation = dataManipulation .^ 2;
+
+dataManipulation = dataManipulation';
+
+dataManipulation = sum(dataManipulation)';
+
+minLoc = find(dataManipulation(:,1) == min(dataManipulation(:,1)));
+
+f = means(minLoc,numFeatures + 1)
 endfunction
