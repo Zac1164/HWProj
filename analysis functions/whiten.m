@@ -7,13 +7,17 @@ slant_location = strcat(folder,"/training/slant_data.txt");
 skew_location = strcat(folder,"/training/skew_data.txt");
 asc_vs_desc_location = strcat(folder,"/training/asc_vs_desc_data.txt");
 curvature_location = strcat(folder,"/training/curvature_data.txt");
+curvature_direction_location = strcat(folder,"/training/curvature_direction_data.txt");
+slant_energy_location = strcat(folder,"/training/slant_energy_data.txt");
 
 load(slant_location);
 load(skew_location);
 load(asc_vs_desc_location);
 load(curvature_location);
+load(curvature_direction_location);
+load(slant_energy_location);
 
-data = [data_slant, data_skew, data_asc, data_curv];
+data = [data_slant, data_skew, data_asc, data_curv, data_curv_direct, data_slant_energy];
 
 numFeatures = columns(data);
 

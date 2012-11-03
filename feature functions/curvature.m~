@@ -11,7 +11,7 @@ for k = 1:numel(bounds)
 	if rows(bounds{k}) > max_rows
 		max_rows = rows(bounds{k});
 		border = k;
-	end
+	endif
 endfor
 
 for k = 1:numel(bounds)
@@ -20,8 +20,8 @@ for k = 1:numel(bounds)
 		localMat = zeros(row_size - (2 * edgeLength),1);
 		adjusted_row_size = row_size - (2 * edgeLength);
 		if(adjusted_row_size > 0)
-			globalTotal += adjusted_row_size;
-		end
+			globalTotal = globalTotal  + adjusted_row_size;
+		endif
 		for(i = 1:1:adjusted_row_size)
 			x1 = bounds{k}(i,1);
 			y1 = bounds{k}(i,2);
@@ -38,14 +38,13 @@ for k = 1:numel(bounds)
 				radius = numerator/denominator;
 			else
 				radius = 0;
-			end
+			endif
 			if(radius < 1000)
 				localMat(i,1) = radius;
-			end
+			endif
 		endfor
 		globalMat(k,1) = sum(localMat);
-	end
+	endif
 endfor
-globalMat;
 f = sum(globalMat) / globalTotal;
 endfunction

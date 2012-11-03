@@ -1,4 +1,4 @@
-# Created by Octave 3.2.4, Thu Nov 01 05:18:32 2012 CDT <zac1164@zac1164-VirtualBox>
+# Created by Octave 3.2.4, Fri Nov 02 16:29:27 2012 CDT <zac1164@zac1164-VirtualBox>
 # name: data_curv
 # type: matrix
 # rows: 205

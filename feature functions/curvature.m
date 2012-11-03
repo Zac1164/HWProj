@@ -20,7 +20,7 @@ for k = 1:numel(bounds)
 		localMat = zeros(row_size - (2 * edgeLength),1);
 		adjusted_row_size = row_size - (2 * edgeLength);
 		if(adjusted_row_size > 0)
-			globalTotal += adjusted_row_size;
+			globalTotal = globalTotal + adjusted_row_size;
 		endif
 		for(i = 1:1:adjusted_row_size)
 			x1 = bounds{k}(i,1);
@@ -46,6 +46,5 @@ for k = 1:numel(bounds)
 		globalMat(k,1) = sum(localMat);
 	endif
 endfor
-globalMat;
 f = sum(globalMat) / globalTotal;
 endfunction
