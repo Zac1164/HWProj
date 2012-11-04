@@ -1,0 +1,17 @@
+function generateLabels(numClasses,numExamples)
+
+count = 1;
+label = 1;
+data_class = zeros(numClasses*numExamples, 1);
+
+for j = 1:1:numClasses
+	for k = 1:1:numExamples
+		data_class(count) = j;
+		count = count + 1;
+	endfor
+	label = label + 1;
+endfor
+
+data_class
+
+endfunction

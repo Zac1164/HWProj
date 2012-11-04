@@ -1,0 +1,5 @@
+function f = entropy_measure(im)
+
+imbw = im2bw(im,graythresh(im));
+
+endfunction

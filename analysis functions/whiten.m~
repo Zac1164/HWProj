@@ -8,7 +8,7 @@ skew_location = strcat(folder,"/training/skew_data.txt");
 asc_vs_desc_location = strcat(folder,"/training/asc_vs_desc_data.txt");
 curvature_location = strcat(folder,"/training/curvature_data.txt");
 curvature_direction_location = strcat(folder,"/training/curvature_direction_data.txt");
-slant_energy_location = strcat(folder,"/test/slant_energy_data.txt");
+slant_energy_location = strcat(folder,"/training/slant_energy_data.txt");
 
 load(slant_location);
 load(skew_location);

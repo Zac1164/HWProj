@@ -14,7 +14,7 @@ fid = fopen(file);
 count = 1;
 while !feof(fid)
 	im = imread(fgetl(fid));
-	data_skew(count,1) = skew(im);
+	data_skew(count,1) = skew2(im);
 	count = count + 1;
 endwhile
 save_location = strcat(folder,"/skew_data.txt");
