@@ -1,19 +1,26 @@
-function [f,g] = NNClassifier(folder,numClasses)
+function [f,g] = NNClassifier(folder,numClasses,k,useMean)
 
-[transformW, means] = whiten(folder,numClasses);
+[transformW, means, training] = whiten(folder,numClasses);
+#[means,training] = basicNormalization(folder,numClasses,0);
 data = getTestData(folder);
+#[means2,transformedData] = basicNormalization(folder,numClasses,data);
 transformedData = data * transformW;
 
 sizeData = rows(data);
 NN = zeros(sizeData,1);
-
-for j = 1:1:sizeData
-	NN(j) = nearestNeighbor(means,transformedData(j,:));
-endfor
+if( useMean == 1)
+	for j = 1:1:sizeData
+		NN(j) = nearestNeighbor(means,transformedData(j,:),numClasses,1);
+	endfor
+else
+	for j = 1:1:sizeData
+		NN(j) = nearestNeighbor(training,transformedData(j,:),numClasses,k);
+	endfor
+endif
 
 true_class_location = strcat(folder,"/test/true_class_data.txt");
 trueClass = load(true_class_location);
-matched = (NN == trueClass)
+matched = (NN == trueClass);
 percent_correct = sum(matched) / rows(matched);
 
 f = NN;

@@ -1,4 +1,4 @@
-function [f,g,h] = whiten(folder,numClasses)
+function [f,g,h] = basicNormalization(folder,numClasses,data2)
 
 count = 1;
 currentClass = 0;
@@ -21,9 +21,13 @@ load(entropy_location);
 
 data = [data_slant, data_skew, data_asc, data_curv, data_curv_direct, data_slant_energy, data_entropy];
 
-numFeatures = columns(data);
+if(data2 == 0)
+	data2 = data;
+endif
 
-numExamplesPerClass = rows(data) / numClasses;
+numFeatures = columns(data2);
+
+numExamplesPerClass = rows(data2) / numClasses;
 
 means = zeros(numClasses,numFeatures);
 
@@ -31,20 +35,18 @@ lowerBound = 1;
 
 upperBound = numExamplesPerClass;
 
-covMatrix = zeros(numFeatures, numFeatures);
+maxData = max(data);
+minData = min(data);
+
+for j = 1:1:rows(data2)
+	data2(j,:) = (data2(j,:) - minData) ./ (maxData - minData);
+endfor
 
 for j = 1:1:numClasses
-	covMatrix = covMatrix + cov(data(lowerBound:upperBound,:));
-	means(j,:) = mean(data(lowerBound:upperBound,:));
+	means(j,:) = mean(data2(lowerBound:upperBound,:))
 	lowerBound = lowerBound + numExamplesPerClass;
 	upperBound = upperBound + numExamplesPerClass;
 endfor
-
-covMatrix = covMatrix ./ numClasses;
-
-[eigenVector, eigenValues] = eig(covMatrix);
-
-transformW = eigenVector * diag(diag(eigenValues .^ (-.5)));
 
 data_class = zeros(numClasses,1);
 
@@ -61,8 +63,7 @@ for j = 1:1:numClasses
 	endfor
 endfor
 
-f = transformW;
-g = [means * transformW,data_class];
-h = [data * transformW,data_class2];
+f = [means,data_class];
+g = [data2,data_class2];
 
 endfunction

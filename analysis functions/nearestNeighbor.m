@@ -1,10 +1,10 @@
-function f = nearestNeighbor(means,data)
+function f = nearestNeighbor(training,test,numClasses,k)
 
-numFeatures = columns(means) - 1;
-dataManipulation = means(:,1:numFeatures);
+numFeatures = columns(training) - 1;
+dataManipulation = training(:,1:numFeatures);
 
 for j = 1:1:numFeatures
-	dataManipulation(:,j) = dataManipulation(:,j) - data(1,j);
+	dataManipulation(:,j) = dataManipulation(:,j) - test(1,j);
 endfor
 
 dataManipulation = dataManipulation .^ 2;
@@ -13,7 +13,12 @@ dataManipulation = dataManipulation';
 
 dataManipulation = sum(dataManipulation)';
 
-minLoc = find(dataManipulation(:,1) == min(dataManipulation(:,1)));
+dataManipulation = [dataManipulation, training(:,numFeatures + 1)];
 
-f = means(minLoc,numFeatures + 1);
+dataManipulation = sortrows(dataManipulation,1);
+
+dataManipulation(1:k,2);
+
+f = mode(dataManipulation(1:k,2));
+
 endfunction

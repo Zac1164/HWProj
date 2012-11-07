@@ -1,4 +1,4 @@
-function [f,g] = whiten(folder,numClasses)
+function [f,g,h] = whiten(folder,numClasses)
 
 count = 1;
 currentClass = 0;
@@ -9,6 +9,7 @@ asc_vs_desc_location = strcat(folder,"/training/asc_vs_desc_data.txt");
 curvature_location = strcat(folder,"/training/curvature_data.txt");
 curvature_direction_location = strcat(folder,"/training/curvature_direction_data.txt");
 slant_energy_location = strcat(folder,"/training/slant_energy_data.txt");
+entropy_location = strcat(folder,"/training/entropy_data.txt");
 
 load(slant_location);
 load(skew_location);
@@ -16,8 +17,9 @@ load(asc_vs_desc_location);
 load(curvature_location);
 load(curvature_direction_location);
 load(slant_energy_location);
+load(entropy_location);
 
-data = [data_slant, data_skew, data_asc, data_curv, data_curv_direct, data_slant_energy];
+data = [data_slant, data_skew, data_asc, data_curv, data_curv_direct, data_slant_energy, data_entropy];
 
 numFeatures = columns(data);
 
@@ -50,7 +52,17 @@ for j = 1:1:numClasses
 	data_class(j,1) = j;
 endfor
 
+count = 1;
+
+for j = 1:1:numClasses
+	for k = 1:1:numExamplesPerClass
+		data_class2(count,1) = j;
+		count = count + 1;
+	endfor
+endfor
+
 f = transformW;
 g = [means * transformW,data_class];
+h = [data * transformW,data_class2];
 
 endfunction
