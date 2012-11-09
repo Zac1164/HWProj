@@ -7,7 +7,7 @@ while !feof(fid)
 	count = count + 1;
 endwhile
 count = count - 1;
-data_slant = zeros(count,3);
+data_slant = zeros(count,4);
 fclose(fid);
 
 fid = fopen(file);

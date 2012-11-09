@@ -12,6 +12,8 @@ Gslant = atan(Gy ./ Gx);
 Gfin = zeros(rows(Gslant),columns(Gslant));
 GfinPositive = zeros(rows(Gslant),columns(Gslant));
 GfinNegative = zeros(rows(Gslant),columns(Gslant));
+numPositive = 0;
+numNegative = 0;
 Gintsum = 0;
 for j = 1:1:size(Gslant)(1,1)
 	for k = 1:1:size(Gslant)(1,2)
@@ -19,13 +21,15 @@ for j = 1:1:size(Gslant)(1,1)
 			Gfin(j,k) = Gslant(j,k) * Gintensity(j,k);
 			Gintsum = Gintsum + Gintensity(j,k);
 		endif
-		if Gslant(j,k) > 0 && Gslant(j,k) < 1.6
+		if Gslant(j,k) >= 0 && Gslant(j,k) < 1.6
 			GfinPositive(j,k) = Gslant(j,k) * Gintensity(j,k);
+			numPositive = numPositive + 1;
 		endif
 		if Gslant(j,k) > -1.6 && Gslant(j,k) < 0
 			GfinNegative(j,k) = Gslant(j,k) * Gintensity(j,k);
+			numNegative = numNegative + 1;
 		endif
 	endfor
 endfor
-f = [sum(Gfin(:))/Gintsum,sum(GfinPositive(:))/Gintsum,sum(GfinNegative(:))/Gintsum];
+f = [sum(Gfin(:))/Gintsum,sum(GfinPositive(:))/Gintsum,sum(GfinNegative(:))/Gintsum,numPositive/(numPositive + numNegative)];
 endfunction
