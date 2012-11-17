@@ -1,0 +1,14 @@
+function all_segment(file,folder)
+
+fid = fopen(file);
+count = 1;
+while !feof(fid)
+	im = imread(fgetl(fid));
+	save_location = strcat(folder,"/",num2str(count));
+	mkdir(save_location);
+	segmentLines(im,save_location);
+	count = count + 1;
+endwhile
+fclose(fid);
+
+endfunction

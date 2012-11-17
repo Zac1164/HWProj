@@ -15,7 +15,6 @@ for l = -4:0.5:4
 		skew = l;
 	endif
 endfor
-skew
 for l = (skew - 0.5):0.1:(skew + 0.5)
 	im2 = imrotate(imbw,l,"bilinear","loose",0);
 	im90 = rot90(im2);
@@ -27,7 +26,6 @@ for l = (skew - 0.5):0.1:(skew + 0.5)
 		skew = l;
 	endif
 endfor
-skew
 for l = (skew - 0.1):0.05:(skew + 0.1)
 	im2 = imrotate(imbw,l,"bilinear","loose",0);
 	im90 = rot90(im2);

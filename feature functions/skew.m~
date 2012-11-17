@@ -1,4 +1,5 @@
 function f = skew(im)
+
 skew = -4;
 skew_max = 0;
 skew_location = 0;
@@ -15,4 +16,5 @@ for l = -4:0.05:4
 	endif
 endfor
 f = skew;
+
 endfunction
