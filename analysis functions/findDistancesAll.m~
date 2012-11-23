@@ -1,0 +1,26 @@
+function [f,g] = findDistancesAll(folder1,folder2)
+
+[a,b,c,d,f,g] = whiten(folder1,8);
+transform = a;
+[a,b,c,d,f,g] = whiten(folder2,208);
+data = d;
+
+dataTransformed = d * a;
+
+sizeData = rows(dataTransformed);
+output = zeros(sizeData * sizeData,3);
+count = 1;
+for k = 1:1:sizeData
+	for l = 1:1:sizeData
+		output(count,1) = k;
+		output(count,2) = l;
+		output(count,3) = distance(dataTransformed,k,l);
+		count = count + 1;
+	endfor
+endfor
+
+save_location = strcat(folder2,"/distances.txt");
+
+save(save_location,"output");
+
+endfunction

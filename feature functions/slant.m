@@ -1,5 +1,7 @@
 function f = slant(im)
-im = im .* imcomplement(im2bw(im,graythresh(im)));
+if ~isbw(im)
+	im = im .* imcomplement(im2bw(im,graythresh(im)));
+endif
 templateX = [-1,0,1;-2,0,2;-1,0,1];
 templateY = [-1,-2,-1;0,0,0;1,2,1];
 Gx = filter2(templateX,im);

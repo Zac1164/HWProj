@@ -1,5 +1,9 @@
 function f = slant(im)
-im = im .* imcomplement(im2bw(im,graythresh(im)));
+if ~isbw(im)
+	im = im .* imcomplement(im2bw(im,graythresh(im)));
+else
+	im = im .* imcomplement(im);
+endif
 templateX = [-1,0,1;-2,0,2;-1,0,1];
 templateY = [-1,-2,-1;0,0,0;1,2,1];
 Gx = filter2(templateX,im);
@@ -21,7 +25,7 @@ for j = 1:1:size(Gslant)(1,1)
 			Gfin(j,k) = Gslant(j,k) * Gintensity(j,k);
 			Gintsum = Gintsum + Gintensity(j,k);
 		endif
-		if Gslant(j,k) > 0 && Gslant(j,k) < 1.6
+		if Gslant(j,k) >= 0 && Gslant(j,k) < 1.6
 			GfinPositive(j,k) = Gslant(j,k) * Gintensity(j,k);
 			numPositive = numPositive + 1;
 		endif

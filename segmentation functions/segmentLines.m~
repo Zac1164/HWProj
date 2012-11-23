@@ -1,12 +1,12 @@
 function f = segmentLines(im,folder)
 imbw = imcomplement(im);
-tic();
+#tic();
 skew = document_skew(imbw);
 imbw = imrotate(imbw,skew,"bilinear","loose",0);
 if ~isbw(imbw)
 	imbw = im2bw(imbw,graythresh(imbw));
 endif
-toc();
+#toc();
 CCLabel = bwlabel(imbw,4);
 #imshow(label2rgb(CCLabel));
 modeMatrix = [];
@@ -30,7 +30,7 @@ threshold = 0.75;
 finalLineComps = [];
 lines{1} = [];
 lineCount = 1;
-tic();
+#tic();
 while(rows(compData) > 1)
 	if(white != compData(1,1))
 		lineQueue = compData(1,:);
@@ -86,7 +86,7 @@ while(rows(compData) > 1)
 	finalLineComps = [];
 	lineCount = lineCount + 1;
 endwhile
-toc();
+#toc();
 imageHeight = rows(imbw);
 imageWidth = columns(imbw);
 spanReq = 0.5;
@@ -97,7 +97,7 @@ limitedData = false;
 densityMatrix = [];
 densityCount = 1;
 while(minLines == false)
-	tic();
+	#tic();
 	imageCount = 1;
 	for l = 1:1:columns(lines)
 		newImage = zeros(imageHeight,imageWidth);
@@ -143,7 +143,7 @@ while(minLines == false)
 			limitedData = true;
 		endif
 	endif
-	toc();
+	#toc();
 endwhile
 #zeroImage = zeros(imageHeight,imageWidth);
 #newImage = (newImage > zeroImage);

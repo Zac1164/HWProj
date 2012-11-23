@@ -1,5 +1,7 @@
 function f = curvature(im,edgeLength)
-imbw = im2bw(im,graythresh(im));
+if ~isbw(im)
+	imbw = im2bw(im,graythresh(im));
+endif
 bounds = bwboundaries (imbw);
 max_rows = 0;
 border = -1;
@@ -20,7 +22,7 @@ for k = 1:numel(bounds)
 		localMat = zeros(row_size - (2 * edgeLength),1);
 		adjusted_row_size = row_size - (2 * edgeLength);
 		if(adjusted_row_size > 0)
-			globalTotal = globalTotal  + adjusted_row_size;
+			globalTotal = globalTotal + adjusted_row_size;
 		endif
 		for(i = 1:1:adjusted_row_size)
 			x1 = bounds{k}(i,1);

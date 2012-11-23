@@ -3,7 +3,13 @@ function f = skew2(im)
 skew = -4;
 skew_max = 0;
 skew_location = 0;
-imbw = imcomplement(im2bw(im,graythresh(im)));
+
+if ~isbw(im)
+	imbw = imcomplement(im2bw(im,graythresh(im)));
+else
+	imbw = imcomplement(im);
+endif
+
 for l = -4:0.5:4
 	im2 = imrotate(imbw,l,"bilinear","loose",0);
 	im90 = rot90(im2);

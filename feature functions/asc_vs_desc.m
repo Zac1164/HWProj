@@ -1,6 +1,11 @@
 function f = asc_vs_desc(im,skew)
-im2 = imrotate(im,skew,"bilinear","loose",255);
-imbw = imcomplement(im2bw(im2,graythresh(im2)));
+if ~isbw(im)
+	im2 = imrotate(im,skew,"bilinear","loose",255);
+	imbw = imcomplement(im2bw(im2,graythresh(im2)));
+else
+	im2 = imrotate(im,skew,"bilinear","loose",1);
+	imbw = imcomplement(im2);
+endif
 im90 = rot90(imbw);
 dist = sum(im90);
 max_location = find(dist == max(dist));

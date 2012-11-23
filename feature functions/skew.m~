@@ -8,7 +8,6 @@ for l = -4:0.05:4
 	im2 = imrotate(imbw,l,"bilinear","loose",0);
 	im90 = rot90(im2);
 	dist = sum(im90);
-	current = 0;
 	current_max = max(dist);
 	if current_max > skew_max
 		skew_max = current_max;

@@ -1,5 +1,11 @@
 function f = curvature_direction(im,edgeLength)
-imbw = im2bw(im,graythresh(im));
+
+if ~isbw(im)
+	imbw = im2bw(im,graythresh(im));
+else
+	imbw = im;
+endif
+
 bounds = bwboundaries (imbw);
 max_rows = 0;
 border = -1;
