@@ -7,7 +7,13 @@ else
 endif
 slope = -1 / tan(1.57 - slant);
 im = imshear(im,'x',slope,'loose');
+imshow(imcomplement(im));
 energy = sum(im) .^ 2;
+plot(energy);
+title ("Slant Energy Histogram");
+xlabel ("position on x-axis (pixels)");
+ylabel ("number of black pixels squared");
+print('slantenergy.pdf');
 peak = find( diff( sign( diff([0; energy(:); 0]) ) ) < 0 );
 valley = find( diff( sign( diff([0; energy(:); 0]) ) ) > 0 );
 energy2 = zeros(rows(peak),1);

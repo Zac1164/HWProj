@@ -13,13 +13,13 @@ entropy_location = strcat(folder,"/entropy_data.txt");
 
 load(slant_location);
 load(skew_location);
-#load(asc_vs_desc_location);
+load(asc_vs_desc_location);
 load(curvature_location);
 load(curvature_direction_location);
 load(slant_energy_location);
 load(entropy_location);
 
-data = [data_slant, data_skew, data_curv, data_curv_direct, data_slant_energy, data_entropy];
+data = [data_slant, data_skew, data_asc, data_curv, data_curv_direct, data_slant_energy, data_entropy];
 
 numFeatures = columns(data);
 

@@ -1,7 +1,10 @@
 function f = skew_energy(imbw,skew)
 
-imbw = imrotate(imbw,90 + skew,"bilinear","loose",0);
+imbw2 = imrotate(imbw,skew,"bilinear","loose",255);
+imbw = imrotate(imbw,90 + skew,"bilinear","loose",255);
 energy = sum(imbw) .^ 2;
+imshow(imbw2);
+print('skew1.png');
 peak = find( diff( sign( diff([0; energy(:); 0]) ) ) < 0 );
 valley = find( diff( sign( diff([0; energy(:); 0]) ) ) > 0 );
 energy2 = zeros(rows(peak),1);

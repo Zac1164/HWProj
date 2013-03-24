@@ -1,6 +1,7 @@
 function [f,g] = NNClassifier(folder,numClasses,k,useMean)
 
-[transformW, means, training] = whiten(folder,numClasses);
+training_location = strcat(folder,"/training");
+[transformW, means, training, dataRaw, transformedMeansData, classifiedData] = whiten(training_location,numClasses);
 #[means,training] = basicNormalization(folder,numClasses,0);
 data = getTestData(folder);
 #[means2,transformedData] = basicNormalization(folder,numClasses,data);
@@ -10,11 +11,11 @@ sizeData = rows(data);
 NN = zeros(sizeData,1);
 if( useMean == 1)
 	for j = 1:1:sizeData
-		NN(j) = nearestNeighbor(means,transformedData(j,:),numClasses,1);
+		NN(j) = nearestNeighbor(classifiedData,transformedData(j,:),numClasses,1);
 	endfor
 else
 	for j = 1:1:sizeData
-		NN(j) = nearestNeighbor(training,transformedData(j,:),numClasses,k);
+		NN(j) = nearestNeighbor(classifiedData,transformedData(j,:),numClasses,k);
 	endfor
 endif
 

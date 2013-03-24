@@ -17,7 +17,7 @@ dataManipulation = [dataManipulation, training(:,numFeatures + 1)];
 
 dataManipulation = sortrows(dataManipulation,1);
 
-dataManipulation(1:k,2)
+dataManipulation(1:k,2);
 
 f = mode(dataManipulation(1:k,2))
 

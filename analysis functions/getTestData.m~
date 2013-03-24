@@ -16,6 +16,6 @@ load(curvature_direction_location);
 load(slant_energy_location);
 load(entropy_location);
 
-f = [data_slant, data_skew, data_asc, data_curv, data_curv_direct,data_slant_energy,data_entropy];
+f = [data_slant, data_skew, data_asc, data_curv, data_curv_direct, data_slant_energy];#, data_entropy];
 
 endfunction

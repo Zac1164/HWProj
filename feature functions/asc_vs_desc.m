@@ -9,6 +9,12 @@ endif
 im90 = rot90(imbw);
 dist = sum(im90);
 max_location = find(dist == max(dist));
+subplot(1,1,1);
+plot(dist);
+title ("Pixel Count Histogram");
+xlabel ("position on y-axis (pixels)");
+ylabel ("number of black pixels");
+print('ascenergy.png');
 n = max_location;
 n2 = columns(dist);
 ascenders = dist(1:n);
